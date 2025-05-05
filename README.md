@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🗣 DebateMate – AI-Powered Debate Analysis & Trainer
+DebateMate is an open-source platform that offers personalized, one-to-one AI training sessions with secure authentication. Users receive customized learning roadmaps powered by Gemini AI, and after uploading or live-recording debate audio, the system transcribes, analyzes performance, and provides corrective feedback to enhance debating and public speaking skills.
 
-## Getting Started
+## ✨ Features
+- 🔐 Secure Authentication with NextAuth & Next.js
+- 🎯 Personalized AI Training: One-to-one debate sessions with real-time feedback
+- 🛣 Customized learning paths with clear timelines: Gemini AI 
+- 💻 Landing Page UI: Built using Next.js and Shadcn UI
 
-First, run the development server:
+## 📦 Folder Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+DebateMate/
+- ├── .next/                   # Next.js build output
+- ├── node_modules/            # Project dependencies
+- ├── public/                  # Static assets (images, fonts, etc.)
+- ├── src/                     # Main source directory
+- │   ├── app/                 # Next.js app directory (pages and layouts)
+- │   ├── components/          # UI components
+- │   ├── hooks/               # Custom React hooks
+- │   ├── lib/                 # Utilities and libraries
+- │   └── middleware.ts        # Middleware (e.g., auth, logging)
+- ├── .env                     # Environment variables
+- ├── .gitignore               # Git ignore rules
+- ├── CODE_OF_CONDUCT.md       # Community guidelines
+- ├── CONTRIBUTING.md          # Contribution rules
+- ├── LICENSE                  # MIT License
+- ├── README.md                # Project overview
+- ├── components.json          # Shadcn component config
+- ├── eslint.config.mjs        # ESLint config
+- ├── next.config.ts           # Next.js config
+- ├── next-env.d.ts            # Next.js type definitions
+- ├── package.json             # NPM package metadata
+- ├── package-lock.json        # Dependency lock file
+- ├── postcss.config.mjs       # PostCSS config
+- └── tsconfig.json            # TypeScript config
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
+🧰 Prerequisites
+* Node.js v18+
+* NextJs 15
+* NPM, pip, and Git
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Installation
+1. Clone the Repository
+- git clone https://github.com/Ankit27-09/DebateMate.git
+- cd debatemates
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. FrontEnd(Next.Ts)
+  - npm install
+  - npm run dev
+Then open http://localhost:3000 in your browser.
