@@ -49,3 +49,21 @@ DebateMate/
   - npm install
   - npm run dev
 Then open http://localhost:3000 in your browser.
+
+## 🤝 Contributing
+
+We welcome contributions! See our [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on how to get started. You can also explore:
+
+- `good first issue`
+- `help wanted`
+- Join the discussion tab
+
+## 📢 Community & Support
+
+- 🗨️ [GitHub Discussions](https://github.com/Ankit27-09/DebateMate/discussions)
+- 🐞 [Raise an Issue](https://github.com/Ankit27-09/DebateMate/issues)
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE). Feel free to use, fork, and contribute.
+
