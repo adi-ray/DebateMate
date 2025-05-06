@@ -63,6 +63,24 @@ We welcome contributions! See our [CONTRIBUTING.md](./CONTRIBUTING.md) for guide
 - 🗨️ [GitHub Discussions](https://github.com/Ankit27-09/DebateMate/discussions)
 - 🐞 [Raise an Issue](https://github.com/Ankit27-09/DebateMate/issues)
 
+## 🌍 Impact
+DebateMate lowers the barrier to effective debating practice by providing instant, AI‑driven feedback and personalized learning paths—ideal for students, educators, and public speakers.
+
+## 🔮 Future Scope
+
+- 🎭 Emotion-Aware AI Debater: Adapts tone and rebuttal style in real-time
+
+- 👨‍🏫 Virtual Mentor Mode: Debate against AI-powered personas (e.g., Lincoln, Tharoor)
+
+- 📈 Debate Progress Analytics: Track clarity, logic, and tone over time with visual insights
+
+- 🏅 Gamified Debate Ladder: Ranks, achievements, and global leaderboards
+
+- 🧩 Educator Plugin System: Custom debate topics, rubrics, and assignments
+
+- 🌐 Multilingual & Cultural Debate Modes: Regional language support with culturally adaptive prompts
+
+
 ## 📄 License
 
 This project is licensed under the [MIT License](./LICENSE). Feel free to use, fork, and contribute.
