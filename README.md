@@ -38,7 +38,7 @@ DebateMate/
 🧰 Prerequisites
 * Node.js v18+
 * NextJs 15
-* NPM, pip, and Git
+* npm, pip, and Git
 
 ## 🛠️ Installation
 1. Clone the Repository
@@ -70,7 +70,7 @@ DebateMate lowers the barrier to effective debating practice by providing instan
 
 - 🎭 Emotion-Aware AI Debater: Adapts tone and rebuttal style in real-time
 
-- 👨‍🏫 Virtual Mentor Mode: Debate against AI-powered personas (e.g., Lincoln, Tharoor)
+- 👨‍🏫 Virtual Mentor Mode: Debate against AI-powered personas model(eg. Tavus)
 
 - 📈 Debate Progress Analytics: Track clarity, logic, and tone over time with visual insights
 
