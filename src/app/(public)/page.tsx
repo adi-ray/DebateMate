@@ -14,7 +14,7 @@ import Footer from "@/components/footer"
 import TestimonialCarousel from "@/components/landing/testimonial-carousel"
 import LogoMarquee from "@/components/logo-marquee"
 import { cn } from "@/lib/utils"
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 import FeaturesPage from "./features/page"
 import TestimonialsPage from "./testimonials/page"
 import PricingPage from "./pricing/page"

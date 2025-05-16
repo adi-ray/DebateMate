@@ -25,7 +25,7 @@ Keep your overall response under 100 words for quick, impactful debate practice.
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const result = await model.generateContent({
-      contents: [{ parts: [{ text: prompt }] }],
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
       generationConfig: {
         maxOutputTokens: 200,
         temperature: 0.7,

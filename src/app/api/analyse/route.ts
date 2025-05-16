@@ -1,9 +1,9 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextResponse } from 'next/server';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-export async function POST(req) {
+export async function POST(req: Request) {
   try {
     const { conversations } = await req.json();
 
@@ -14,7 +14,7 @@ export async function POST(req) {
     }
 
     // ✅ Corrected template literal usage inside `.map()`
-    const formattedConversations = conversations.map(msg =>
+    const formattedConversations = conversations.map((msg: { type: string; stance?: string; content: string }) =>
       `${msg.type === 'user' ? 'User' : 'AI'} (${msg.type === 'user' ? msg.stance : 'counter'}): ${msg.content}`
     ).join('\n\n');
 
@@ -46,7 +46,7 @@ Format your response as JSON with the following structure:
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const result = await model.generateContent({
-      contents: [{ parts: [{ text: prompt }] }],
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
       generationConfig: {
         maxOutputTokens: 1024,
         temperature: 0.4,

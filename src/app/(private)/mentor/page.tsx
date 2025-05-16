@@ -1,20 +1,66 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+interface SuggestedTopic {
+  title: string;
+  description: string;
+}
+
+interface UserMessage {
+  type: 'user';
+  content: string;
+  stance: string;
+  timestamp: string;
+  isError?: boolean;
+}
+
+interface AIMessage {
+  type: 'ai';
+  content: string;
+  timestamp: string;
+  isError?: boolean;
+}
+
+type Message = UserMessage | AIMessage;
+
+// Add this interface to define the structure of performanceStats
+interface PerformanceStats {
+  debatesCompleted: number;
+  avgResponseLength: number;
+  mostFrequentTopics: string[];
+  strongestArguments: string[];
+}
+
+// Add interface for debate analysis
+interface DebateAnalysis {
+  overallScore: {
+    score: string;
+    explanation: string;
+  };
+  strengths: string;
+  weaknesses: string;
+  persuasiveness: {
+    score: string;
+    explanation: string;
+  };
+  evidenceQuality: string;
+  improvementAreas: string[];
+}
 
 export default function DebatePage() {
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [analysisLoading, setAnalysisLoading] = useState(false);
   const [stance, setStance] = useState('pro');
-  const [conversations, setConversations] = useState([]);
-  const [performanceStats, setPerformanceStats] = useState({
+  const [conversations, setConversations] = useState<Message[]>([]);
+  const [performanceStats, setPerformanceStats] = useState<PerformanceStats>({
     debatesCompleted: 0,
     avgResponseLength: 0,
     mostFrequentTopics: [],
     strongestArguments: []
   });
-  const [debateAnalysis, setDebateAnalysis] = useState(null);
-  const [suggestedTopics, setSuggestedTopics] = useState([]);
+  const [debateAnalysis, setDebateAnalysis] = useState<DebateAnalysis | null>(null);
+  const [suggestedTopics, setSuggestedTopics] = useState<SuggestedTopic[]>([]);
   const [activeTab, setActiveTab] = useState('debate');
 
   // Fetch suggested topics on initial load
@@ -42,7 +88,7 @@ export default function DebatePage() {
     if (!userInput.trim()) return;
 
     // Add user message to conversation
-    const newUserMessage = {
+    const newUserMessage: UserMessage = {
       type: 'user',
       content: userInput,
       stance: stance,
@@ -51,7 +97,7 @@ export default function DebatePage() {
     
     setConversations([...conversations, newUserMessage]);
     setLoading(true);
-    setUserInput(''); // Clear input after sending
+    setUserInput('');
 
     try {
       const res = await fetch('/api/debate', {
@@ -62,20 +108,18 @@ export default function DebatePage() {
 
       const data = await res.json();
       
-      // Add Virtual Debater to conversation
-      const newAIMessage = {
+
+      const newAIMessage: AIMessage = {
         type: 'ai',
         content: data.aiResponse,
         timestamp: new Date().toISOString()
       };
       
-      setConversations(prev => [...prev, newAIMessage]);
-      
-      // Update performance stats
+      setConversations(prev => [...prev, newAIMessage]); 
       updatePerformanceStats([...conversations, newUserMessage, newAIMessage]);
     } catch (err) {
-      // Add error message to conversation
-      const errorMessage = {
+  
+      const errorMessage: AIMessage = {
         type: 'ai',
         content: "Unable to generate response. Please try again.",
         isError: true,
@@ -88,7 +132,7 @@ export default function DebatePage() {
     }
   };
 
-  const updatePerformanceStats = (updatedConversations) => {
+  const updatePerformanceStats = (updatedConversations: Message[]) => {
     // Only count complete exchanges (user message followed by AI response)
     const completeDebates = Math.floor(updatedConversations.filter(msg => !msg.isError).length / 2);
     
@@ -103,7 +147,7 @@ export default function DebatePage() {
     const randomTopics = topics.sort(() => 0.5 - Math.random()).slice(0, 3);
     
     // For demo purposes, pick strongest arguments from conversation
-    let strongestArgs = [];
+    let strongestArgs: string[] = [];
     if (updatedConversations.length >= 2) {
       strongestArgs = updatedConversations
         .filter(msg => msg.type === 'ai' && !msg.isError)
@@ -123,18 +167,18 @@ export default function DebatePage() {
     });
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       startDebate();
     }
   };
 
-  const selectSuggestedTopic = (topic) => {
+  const selectSuggestedTopic = (topic: string) => {
     setUserInput(topic);
   };
 
-  const analyzeDebate = async () => {
+  const analyzeDebate = useCallback(async () => {
     if (conversations.length < 2) {
       // Not enough conversation to analyze
       return;
@@ -162,14 +206,14 @@ export default function DebatePage() {
     } finally {
       setAnalysisLoading(false);
     }
-  };
+  }, [conversations]);
 
   // Automatically analyze debate when switching to analysis tab
   useEffect(() => {
     if (activeTab === 'analysis' && conversations.length >= 2 && !debateAnalysis) {
       analyzeDebate();
     }
-  }, [activeTab]);
+  }, [activeTab, conversations.length, debateAnalysis, analyzeDebate]);
 
   return (
     

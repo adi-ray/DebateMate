@@ -1,17 +1,25 @@
 'use client';
 import { useState } from 'react';
 
+// Define the type for conversation messages
+type Message = {
+  type: 'user' | 'ai';
+  content: string;
+  stance?: string;
+  isError?: boolean;
+};
+
 export default function DebatePage() {
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [stance, setStance] = useState('pro');
-  const [conversations, setConversations] = useState([]);
+  const [conversations, setConversations] = useState<Message[]>([]);
 
   const startDebate = async () => {
     if (!userInput.trim()) return;
 
     // Add user message to conversation
-    const newUserMessage = {
+    const newUserMessage: Message = {
       type: 'user',
       content: userInput,
       stance: stance
@@ -31,7 +39,7 @@ export default function DebatePage() {
       const data = await res.json();
       
       // Add Virtual Debater to conversation
-      const newAIMessage = {
+      const newAIMessage: Message = {
         type: 'ai',
         content: data.aiResponse
       };
@@ -39,7 +47,7 @@ export default function DebatePage() {
       setConversations(prev => [...prev, newAIMessage]);
     } catch (err) {
       // Add error message to conversation
-      const errorMessage = {
+      const errorMessage: Message = {
         type: 'ai',
         content: "Unable to generate response. Please try again.",
         isError: true
@@ -51,7 +59,7 @@ export default function DebatePage() {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       startDebate();
