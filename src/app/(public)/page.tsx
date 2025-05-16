@@ -7,17 +7,13 @@ import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import { Button } from "@/components/ui/button"
 import { useMobile } from "@/hooks/use-mobile"
-
-
 import { useRouter } from 'next/navigation'
 import Footer from "@/components/footer"
-import TestimonialCarousel from "@/components/landing/testimonial-carousel"
 import LogoMarquee from "@/components/logo-marquee"
-import { cn } from "@/lib/utils"
-import Navbar from "@/components/Navbar";
 import FeaturesPage from "./features/page"
 import TestimonialsPage from "./testimonials/page"
 import PricingPage from "./pricing/page"
+import Navbar from "@/components/Navbar"
 
   
 function AvatarModel() {
