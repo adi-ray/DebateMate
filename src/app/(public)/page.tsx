@@ -13,7 +13,7 @@ import LogoMarquee from "@/components/logo-marquee"
 import FeaturesPage from "./features/page"
 import TestimonialsPage from "./testimonials/page"
 import PricingPage from "./pricing/page"
-import Navbar from "@/components/Navbar"
+import Navbar from "@/components/navbar"
 
   
 function AvatarModel() {

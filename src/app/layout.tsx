@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ScrollToTop";
 import { ClerkProvider } from '@clerk/nextjs';
 import "./globals.css";
