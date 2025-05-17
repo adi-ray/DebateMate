@@ -13,7 +13,7 @@ export default function PricingPage() {
 	return (
 		<div>
 			<PricingCards />
-			<div className="container w-full mx-auto">
+			<div className="container w-full mx-auto px-8 sm:px-0">
 				<div className="mt-12">
 					<div className="text-center space-y-4">
 						<h2 className="text-3xl md:text-4xl font-bold">
@@ -107,7 +107,7 @@ export default function PricingPage() {
 				</div>
 			</div>
 
-			<section className="py-20 bg-background">
+			<section className="py-20 bg-background px-8 sm:px-0">
 				<div className="container mx-auto w-full">
 					<div className="max-w-3xl mx-auto">
 						<h2 className="text-3xl font-bold mb-8 text-center">
