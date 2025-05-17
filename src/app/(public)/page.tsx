@@ -8,14 +8,7 @@ import {
 	useScroll,
 	useTransform,
 } from "framer-motion";
-import {
-	ArrowRight,
-	Brain,
-	CheckCircle,
-	FileText,
-	Map,
-	Upload,
-} from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Button } from "@/components/ui/button";
@@ -123,13 +116,13 @@ export default function Home() {
 					className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden"
 				>
 					{/* Background gradient */}
-					<div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-indigo-50 z-0" />
+					<div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-indigo-50 dark:from-background/75 dark:to-background z-0" />
 
 					{/* Animated background shapes */}
 					<div className="absolute inset-0 overflow-hidden z-0">
-						<div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-indigo-100 opacity-60" />
-						<div className="absolute top-1/3 -left-20 w-72 h-72 rounded-full bg-teal-100 opacity-60" />
-						<div className="absolute -bottom-40 right-1/4 w-80 h-80 rounded-full bg-indigo-200 opacity-40" />
+						<div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-indigo-100 dark:bg-indigo-500/30 opacity-60" />
+						<div className="absolute top-1/3 -left-20 w-72 h-72 rounded-full bg-teal-100 dark:bg-teal-500/30 opacity-60" />
+						<div className="absolute -bottom-40 right-1/4 w-80 h-80 rounded-full bg-indigo-200 dark:bg-indigo-600/30 opacity-40" />
 					</div>
 
 					<div className="container mx-auto px-4 z-10">
@@ -145,7 +138,7 @@ export default function Home() {
 								variants={fadeInUp}
 							>
 								<motion.div
-									className="inline-block px-4 py-2 bg-indigo-100 rounded-full text-indigo-700 font-medium text-sm"
+									className="inline-block px-4 py-2 bg-indigo-100 dark:bg-indigo-500/20 rounded-full text-indigo-700 dark:text-indigo-300 font-medium text-sm"
 									initial={{ opacity: 0, x: -20 }}
 									animate={{ opacity: 1, x: 0 }}
 									transition={{ delay: 0.2, duration: 0.5 }}
@@ -154,7 +147,7 @@ export default function Home() {
 								</motion.div>
 
 								<motion.h1
-									className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900"
+									className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground"
 									variants={fadeInUp}
 								>
 									<span className="block">DebateMate:</span>
@@ -164,7 +157,7 @@ export default function Home() {
 								</motion.h1>
 
 								<motion.p
-									className="text-xl md:text-2xl text-gray-700 max-w-xl"
+									className="text-xl md:text-2xl text-muted-foreground max-w-xl"
 									variants={fadeInUp}
 								>
 									1-on-1 AI-driven debates with real-time
@@ -178,7 +171,7 @@ export default function Home() {
 								>
 									<MotionButton
 										size="lg"
-										className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-indigo-200 transition-all"
+										className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl px-8 py-6 text-lg shadow-lg hover:shadow-primary/20 transition-all"
 										whileHover={{ scale: 1.05 }}
 										whileTap={{ scale: 0.98 }}
 									>
@@ -189,7 +182,7 @@ export default function Home() {
 									<MotionButton
 										variant="outline"
 										size="lg"
-										className="border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 rounded-xl px-8 py-6 text-lg"
+										className="border-2 border-primary text-primary hover:bg-primary/10 rounded-xl px-8 py-6 text-lg"
 										whileHover={{ scale: 1.05 }}
 										whileTap={{ scale: 0.98 }}
 									>
@@ -213,17 +206,16 @@ export default function Home() {
 										Join <b>2,000+</b> debaters worldwide
 									</span>
 								</motion.div>
-							</motion.div>
-
+							</motion.div>{" "}
 							<motion.div
 								className="relative h-[500px] lg:h-[600px]"
 								initial={{ opacity: 0, x: 100 }}
 								animate={{ opacity: 1, x: 0 }}
 								transition={{ duration: 0.8, delay: 0.4 }}
 							>
-								<div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-teal-400 rounded-3xl transform rotate-3 opacity-20" />
-								<div className="absolute inset-0 bg-white rounded-3xl shadow-xl overflow-hidden">
-									<div className="absolute top-0 left-0 right-0 h-12 bg-gray-50 flex items-center px-4">
+								<div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-teal-400 dark:from-indigo-600 dark:to-teal-500 rounded-3xl transform rotate-3 opacity-20" />
+								<div className="absolute inset-0 bg-card rounded-3xl shadow-xl overflow-hidden">
+									<div className="absolute top-0 left-0 right-0 h-12 bg-muted flex items-center px-4">
 										<div className="flex space-x-2">
 											<div className="w-3 h-3 rounded-full bg-red-400" />
 											<div className="w-3 h-3 rounded-full bg-yellow-400" />
@@ -270,13 +262,15 @@ export default function Home() {
 					>
 						<div className="w-8 h-12 rounded-full border-2 border-gray-400 flex justify-center">
 							<motion.div
-								className="w-1 h-3 bg-gray-400 rounded-full mt-2"
+								className="h-3 text-gray-400 mt-2"
 								animate={{ y: [0, 6, 0] }}
 								transition={{
 									duration: 1.5,
 									repeat: Number.POSITIVE_INFINITY,
 								}}
-							/>
+							>
+								<ArrowDown />
+							</motion.div>
 						</div>
 					</motion.div>
 				</section>
@@ -288,7 +282,7 @@ export default function Home() {
 				<FeaturesPage />
 
 				{/* How It Works Section */}
-				<section className="py-24 bg-gray-50">
+				<section className="py-24">
 					<div className="container mx-auto px-4">
 						<motion.div
 							className="text-center max-w-3xl mx-auto mb-16"
@@ -297,13 +291,13 @@ export default function Home() {
 							transition={{ duration: 0.6 }}
 							viewport={{ once: true, amount: 0.3 }}
 						>
-							<div className="inline-block px-4 py-2 bg-indigo-100 rounded-full text-indigo-700 font-medium text-sm mb-4">
+							<div className="inline-block px-4 py-2 bg-indigo-100 dark:bg-indigo-500/20 rounded-full text-indigo-700 dark:text-indigo-300 font-medium text-sm mb-4">
 								Simple Process
 							</div>
-							<h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+							<h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
 								How DebateMate Works
 							</h2>
-							<p className="text-xl text-gray-600">
+							<p className="text-xl text-muted-foreground">
 								Our platform makes it easy to practice, learn,
 								and improve your debate skills
 							</p>
@@ -332,7 +326,7 @@ export default function Home() {
 							].map((item, index) => (
 								<motion.div
 									key={index}
-									className="relative bg-white rounded-2xl p-8 shadow-lg"
+									className="relative bg-card rounded-2xl p-8 shadow-lg"
 									initial={{ opacity: 0, y: 40 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									transition={{
@@ -341,13 +335,13 @@ export default function Home() {
 									}}
 									viewport={{ once: true, amount: 0.3 }}
 								>
-									<div className="absolute -top-6 left-8 w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
+									<div className="absolute -top-6 left-8 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold">
 										{item.step}
 									</div>
-									<h3 className="text-2xl font-bold mt-6 mb-4 text-gray-900">
+									<h3 className="text-2xl font-bold mt-6 mb-4 text-foreground">
 										{item.title}
 									</h3>
-									<p className="text-gray-600">
+									<p className="text-muted-foreground">
 										{item.description}
 									</p>
 								</motion.div>
@@ -359,7 +353,7 @@ export default function Home() {
 				{/* Stats Section */}
 				<section
 					ref={statsRef}
-					className="py-24 bg-indigo-900 text-white"
+					className="py-24 bg-indigo-900 dark:bg-indigo-700 text-primary-foreground dark:text-primary"
 				>
 					<div className="container mx-auto px-4">
 						<motion.div
@@ -385,7 +379,7 @@ export default function Home() {
 									<div className="text-4xl md:text-5xl font-bold mb-2">
 										{stat.number}
 									</div>
-									<div className="text-indigo-200">
+									<div className="text-primary-foreground/80 dark:text-primary/75">
 										{stat.label}
 									</div>
 								</motion.div>
@@ -420,7 +414,7 @@ export default function Home() {
 
 							<MotionButton
 								size="lg"
-								className="bg-white text-indigo-600 hover:bg-indigo-50 rounded-xl px-8 py-6 text-lg shadow-lg"
+								className="dark:bg-gray-900 bg-gray-200 text-primary hover:bg-background/90 rounded-xl px-8 py-6 text-lg shadow-lg"
 								whileHover={{ scale: 1.05 }}
 								whileTap={{ scale: 0.98 }}
 							>
@@ -431,8 +425,6 @@ export default function Home() {
 					</div>
 				</section>
 			</main>
-
-			<Footer />
 		</>
 	);
 }
