@@ -456,7 +456,7 @@ export default function NewDebatePage() {
                 {modalType === "report" && (
                   <div className="flex flex-col gap-4">
                     <textarea
-                      rows='4'
+                      rows={4}
                       className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 hover:cursor-pointer"
                       placeholder="Describe the issue..."
                     ></textarea>
