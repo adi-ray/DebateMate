@@ -8,80 +8,81 @@ import { Button } from "@/components/ui/button";
 import { useMobile } from "@/hooks/use-mobile";
 import { ModeToggle } from "@/components/mode-toggle";
 import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
+	SignInButton,
+	SignUpButton,
+	SignedIn,
+	SignedOut,
+	UserButton,
 } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "./mode-toggle";
 
 export default function Navbar() {
-  const [isClient, setIsClient] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const isMobile = useMobile();
-  const pathname = usePathname();
+	const [isClient, setIsClient] = useState(false);
+	const [isScrolled, setIsScrolled] = useState(false);
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const isMobile = useMobile();
+	const pathname = usePathname();
 
-  useEffect(() => {
-    setIsClient(true); // Ensure component runs only on the client
-  }, []);
+	useEffect(() => {
+		setIsClient(true); // Ensure component runs only on the client
+	}, []);
 
-  useEffect(() => {
-    if (isClient) {
-      const handleScroll = () => {
-        if (window.scrollY > 10) {
-          setIsScrolled(true);
-        } else {
-          setIsScrolled(false);
-        }
-      };
+	useEffect(() => {
+		if (isClient) {
+			const handleScroll = () => {
+				if (window.scrollY > 10) {
+					setIsScrolled(true);
+				} else {
+					setIsScrolled(false);
+				}
+			};
 
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
-  }, [isClient]);
+			window.addEventListener("scroll", handleScroll);
+			return () => window.removeEventListener("scroll", handleScroll);
+		}
+	}, [isClient]);
 
-  if (!isClient) {
-    return null;
-  }
+	if (!isClient) {
+		return null;
+	}
 
-  const navLinks = [
-    { name: "Features", href: "/features" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "Testimonials", href: "/testimonials" },
-    { name: "Contact", href: "/contact" },
-    { name: "Roadmap", href: "/roadmap" },
-  ];
+	const navLinks = [
+		{ name: "Features", href: "/features" },
+		{ name: "Pricing", href: "/pricing" },
+		{ name: "Testimonials", href: "/testimonials" },
+		{ name: "Contact", href: "/contact" },
+		{ name: "Roadmap", href: "/roadmap" },
+	];
 
-  return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-background/70 backdrop-blur-md shadow-md py-3"
-          : "bg-transparent py-5"
-      )}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <motion.div
-              className="flex items-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-800 flex items-center justify-center text-white font-bold text-xl mr-2">
-                D
-              </div>
-              <span className="text-xl font-bold text-foreground">
-                DebateMate
-              </span>
-            </motion.div>
-          </Link>
+	return (
+		<header
+			className={cn(
+				"fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+				isScrolled
+					? "bg-background/70 backdrop-blur-md shadow-md py-3"
+					: "bg-transparent py-5"
+			)}
+		>
+			<div className="container mx-auto px-4">
+				<div className="flex items-center justify-between">
+					{/* Logo */}
+					<Link href="/" className="flex items-center">
+						<motion.div
+							className="flex items-center"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.5 }}
+						>
+							<div className="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-800 flex items-center justify-center text-white font-bold text-xl mr-2">
+								D
+							</div>
+							<span className="text-xl font-bold text-foreground">
+								DebateMate
+							</span>
+						</motion.div>
+					</Link>
 
           {/* Desktop Navigation */}
           {!isMobile && (
@@ -111,7 +112,6 @@ export default function Navbar() {
                 })}
               </nav>
               <div className="flex items-center space-x-4">
-                <ModeToggle />
                 <SignedOut>
                   {/* Sign In / Sign Up buttons for signed-out users */}
                   {!isMobile && (
@@ -131,18 +131,21 @@ export default function Navbar() {
                     </motion.div>
                   )}
 
-                  <motion.div
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.7, duration: 0.5 }}
-                  >
-                    <SignUpButton>
-                      <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
-                        Sign Up Free
-                      </Button>
-                    </SignUpButton>
-                  </motion.div>
-                </SignedOut>
+									<motion.div
+										initial={{ opacity: 0, x: 10 }}
+										animate={{ opacity: 1, x: 0 }}
+										transition={{
+											delay: 0.7,
+											duration: 0.5,
+										}}
+									>
+										<SignUpButton>
+											<Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+												Sign Up Free
+											</Button>
+										</SignUpButton>
+									</motion.div>
+								</SignedOut>
 
                 <SignedIn>
                   <Button
@@ -152,6 +155,8 @@ export default function Navbar() {
                     <Link href="/dashboard">Dashboard</Link>
                   </Button>
                 </SignedIn>
+
+                
               </div>
             </>
           )}
@@ -172,9 +177,9 @@ export default function Navbar() {
                   </motion.button>
                 )}
 
-          {/* CTA Buttons */}
-        </div>
-      </div>
+					{/* CTA Buttons */}
+				</div>
+			</div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -205,7 +210,6 @@ export default function Navbar() {
                   </motion.div>
                 ))}
                 <div className="flex items-center space-x-4">
-                  <ModeToggle />
                   <SignedOut>
                     {/* Sign In / Sign Up buttons for signed-out users */}
                     {!isMobile && (
@@ -225,50 +229,59 @@ export default function Navbar() {
                       </motion.div>
                     )}
 
-                    <motion.div
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.7, duration: 0.5 }}
-                    >
-                      <SignUpButton>
-                        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
-                          Sign Up Free
-                        </Button>
-                      </SignUpButton>
-                    </motion.div>
-                  </SignedOut>
+										<motion.div
+											initial={{ opacity: 0, x: 10 }}
+											animate={{ opacity: 1, x: 0 }}
+											transition={{
+												delay: 0.7,
+												duration: 0.5,
+											}}
+										>
+											<SignUpButton>
+												<Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+													Sign Up Free
+												</Button>
+											</SignUpButton>
+										</motion.div>
+									</SignedOut>
 
-                  <SignedIn>
-                    <Button
-                      asChild
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white"
-                    >
-                      <Link href="/dashboard">Dashboard</Link>
-                    </Button>
-                  </SignedIn>
+									<SignedIn>
+										<Button
+											asChild
+											className="bg-indigo-600 hover:bg-indigo-700 text-white"
+										>
+											<Link href="/dashboard">
+												Dashboard
+											</Link>
+										</Button>
+									</SignedIn>
 
-                  {/* Mobile Menu Button */}
-                  {isMobile && (
-                    <motion.button
-                      className="md:hidden text-accent-foreground"
-                      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.8 }}
-                    >
-                      {mobileMenuOpen ? (
-                        <X className="h-6 w-6" />
-                      ) : (
-                        <Menu className="h-6 w-6" />
-                      )}
-                    </motion.button>
-                  )}
-                </div>
-              </nav>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
-  );
+									{/* Mobile Menu Button */}
+									{isMobile && (
+										<motion.button
+											className="md:hidden text-accent-foreground"
+											onClick={() =>
+												setMobileMenuOpen(
+													!mobileMenuOpen
+												)
+											}
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+											transition={{ delay: 0.8 }}
+										>
+											{mobileMenuOpen ? (
+												<X className="h-6 w-6" />
+											) : (
+												<Menu className="h-6 w-6" />
+											)}
+										</motion.button>
+									)}
+								</div>
+							</nav>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</header>
+	);
 }
