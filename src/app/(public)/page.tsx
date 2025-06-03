@@ -34,6 +34,7 @@ export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
   const { scrollYProgress } = useScroll();
 
+  
   const router = useRouter();
 
   const MotionButton = motion(Button);
