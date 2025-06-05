@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMobile } from "@/hooks/use-mobile";
+import { ModeToggle } from "@/components/mode-toggle";
 import {
 	SignInButton,
 	SignUpButton,
@@ -83,58 +84,52 @@ export default function Navbar() {
 						</motion.div>
 					</Link>
 
-					{/* Desktop Navigation */}
-					{!isMobile && (
-						<>
-							<nav className="hidden md:flex items-center space-x-8">
-								{navLinks.map((link, index) => {
-									const isActive = pathname === link.href;
-									return (
-										<motion.div
-											key={link.name}
-											initial={{ opacity: 0, y: -10 }}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{
-												delay: index * 0.1,
-												duration: 0.5,
-											}}
-										>
-											<Link
-												href={link.href}
-												className={`font-medium transition-colors ${
-													isActive
-														? "text-indigo-600"
-														: "text-accent-foreground hover:text-indigo-600"
-												}`}
-											>
-												{link.name}
-											</Link>
-										</motion.div>
-									);
-								})}
-							</nav>
-							<div className="flex items-center space-x-4">
-								<SignedOut>
-									{/* Sign In / Sign Up buttons for signed-out users */}
-									{!isMobile && (
-										<motion.div
-											initial={{ opacity: 0, x: 10 }}
-											animate={{ opacity: 1, x: 0 }}
-											transition={{
-												delay: 0.6,
-												duration: 0.5,
-											}}
-										>
-											<SignInButton>
-												<Button
-													variant="outline"
-													className="border-indigo-600 text-indigo-600 hover:bg-indigo-50"
-												>
-													Log In
-												</Button>
-											</SignInButton>
-										</motion.div>
-									)}
+          {/* Desktop Navigation */}
+          {!isMobile && (
+            <>
+              <nav className="hidden md:flex items-center space-x-8">
+                {navLinks.map((link, index) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                    >
+                      <Link
+                        href={link.href}
+                        className={`font-medium transition-colors ${
+                          isActive
+                            ? "text-indigo-600"
+                            : "text-accent-foreground hover:text-indigo-600"
+                        }`}
+                      >
+                        {link.name}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+              <div className="flex items-center space-x-4">
+                <SignedOut>
+                  {/* Sign In / Sign Up buttons for signed-out users */}
+                  {!isMobile && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.6, duration: 0.5 }}
+                    >
+                      <SignInButton>
+                        <Button
+                          variant="outline"
+                          className="border-indigo-600 text-indigo-600 hover:bg-indigo-50"
+                        >
+                          Log In
+                        </Button>
+                      </SignInButton>
+                    </motion.div>
+                  )}
 
 									<motion.div
 										initial={{ opacity: 0, x: 10 }}
@@ -152,94 +147,87 @@ export default function Navbar() {
 									</motion.div>
 								</SignedOut>
 
-								<SignedIn>
-									<Button
-										asChild
-										className="bg-indigo-600 hover:bg-indigo-700 text-white"
-									>
-										<Link href="/dashboard">Dashboard</Link>
-									</Button>
-								</SignedIn>
+                <SignedIn>
+                  <Button
+                    asChild
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white"
+                  >
+                    <Link href="/dashboard">Dashboard</Link>
+                  </Button>
+                </SignedIn>
 
-								<div className="flex items-center ml-4">
-									<ModeToggle />
-								</div>
-							</div>
-						</>
-					)}
-					{/* Mobile Menu Button */}
-					{isMobile && (
-						<motion.button
-							className="md:hidden text-accent-foreground"
-							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ delay: 0.8 }}
-						>
-							{mobileMenuOpen ? (
-								<X className="h-6 w-6" />
-							) : (
-								<Menu className="h-6 w-6" />
-							)}
-						</motion.button>
-					)}
+                
+              </div>
+            </>
+          )}
+          {/* Mobile Menu Button */}
+                {isMobile && (
+                  <motion.button
+                    className="md:hidden text-accent-foreground"
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    {mobileMenuOpen ? (
+                      <X className="h-6 w-6" />
+                    ) : (
+                      <Menu className="h-6 w-6" />
+                    )}
+                  </motion.button>
+                )}
 
 					{/* CTA Buttons */}
 				</div>
 			</div>
 
-			{/* Mobile Menu */}
-			<AnimatePresence>
-				{mobileMenuOpen && isMobile && (
-					<motion.div
-						className="md:hidden absolute top-full left-0 right-0 bg-background shadow-lg"
-						initial={{ opacity: 0, height: 0 }}
-						animate={{ opacity: 1, height: "auto" }}
-						exit={{ opacity: 0, height: 0 }}
-						transition={{ duration: 0.3 }}
-					>
-						<div className="container mx-auto px-4 py-4">
-							<nav className="flex flex-col space-y-4">
-								{navLinks.map((link, index) => (
-									<motion.div
-										key={link.name}
-										initial={{ opacity: 0, x: -20 }}
-										animate={{ opacity: 1, x: 0 }}
-										transition={{ delay: index * 0.1 }}
-									>
-										<Link
-											href={link.href}
-											className="text-accent-foreground hover:text-indigo-600 font-medium block py-2"
-											onClick={() =>
-												setMobileMenuOpen(false)
-											}
-										>
-											{link.name}
-										</Link>
-									</motion.div>
-								))}
-								<div className="flex items-center space-x-4">
-									<SignedOut>
-										{/* Sign In / Sign Up buttons for signed-out users */}
-										{!isMobile && (
-											<motion.div
-												initial={{ opacity: 0, x: 10 }}
-												animate={{ opacity: 1, x: 0 }}
-												transition={{
-													delay: 0.6,
-													duration: 0.5,
-												}}
-											>
-												<SignInButton>
-													<Button
-														variant="outline"
-														className="border-indigo-600 text-indigo-600 hover:bg-indigo-50"
-													>
-														Log In
-													</Button>
-												</SignInButton>
-											</motion.div>
-										)}
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && isMobile && (
+          <motion.div
+            className="md:hidden absolute top-full left-0 right-0 bg-background shadow-lg"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="container mx-auto px-4 py-4">
+              <nav className="flex flex-col space-y-4">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className="text-accent-foreground hover:text-indigo-600 font-medium block py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                ))}
+                <div className="flex items-center space-x-4">
+                  <SignedOut>
+                    {/* Sign In / Sign Up buttons for signed-out users */}
+                    {!isMobile && (
+                      <motion.div
+                        initial={{ opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6, duration: 0.5 }}
+                      >
+                        <SignInButton>
+                          <Button
+                            variant="outline"
+                            className="border-indigo-600 text-indigo-600 hover:bg-indigo-50"
+                          >
+                            Log In
+                          </Button>
+                        </SignInButton>
+                      </motion.div>
+                    )}
 
 										<motion.div
 											initial={{ opacity: 0, x: 10 }}
